@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .sub{
+            display: none;
+            width: 300px;
+            position: absolute;
+            background: red;
+            border: 2px solid black;
+            top:0;
+            left: 150px;
+        }
+        .cate_wrap{
+            position: relative;
+            width: 150px;
+            background: yellow;
+            border: 1px solid black;
+        }
+
+    </style>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript">
+          $(function () {
+              $('.cate_wrap>li').mousemove(function () {
+                  $(this).find('.sub').show()
+              });
+              $('.cate_wrap>li').mouseleave(function () {
+                  $(this).find('.sub').hide()
+              })
+              $('.sub>li').mousemove(function () {
+                  $(this).find('.type').show()
+              });
+              $('.sub>li').mouseleave(function () {
+                  $(this).find('.type').hide()
+              })
+          })
+    </script>
+</head>
+<body>
+
+<ul class="cate_wrap">
+    {% for cate in cates %}
+        <li>
+            <a href="">{{ cate.name }}</a>
+            <ul class="sub">
+                {% for sub in cate.subs %}
+                    <li>
+                        <a href="">{{ sub.name }}</a>
+                        <ul class="type">
+                            {% for type in sub.types %}
+                                <li><a href="">{{ type.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
