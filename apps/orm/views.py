@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template
 from sqlalchemy import and_, or_
 
+from apps.ext import db
 from apps.orm.models import Category
+from apps.user.models import User
 
 orm = Blueprint('orm', __name__)
 
@@ -56,6 +58,18 @@ def find():
         data.append({'cate_id': cate[0], 'name': cate[1]})
     # Category.query.filter_by()
     return render_template('cate.html', cate_list=data)
+
+@orm.route('/update/')
+def update():
+    user = User.query.get(7)
+    user.username = '未知y用户'
+    db.session.add(user)
+    # 设置了自动提交配置了
+    # db.session.commit()
+
+
+
+
 
 
 @orm.route('/list/<int:page>/<int:size>/')

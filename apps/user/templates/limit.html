@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分页功能的分装</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+{% from 'macro_limit.html' import pagination_by_get as pag %}
+{{ pag(pagination,'user.test2_macro',size) }}
+</body>
+</html>

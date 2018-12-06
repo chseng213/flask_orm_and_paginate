@@ -47,7 +47,7 @@ def add_user():
                 if is_continue:
                     return render_template('add_user.html')
                 else:
-                    return redirect(url_for('.index',page=1,size=3))
+                    return redirect(url_for('.index', page=1, size=3))
             else:
                 return render_template('add_user.html', msg='所有选线为必填项,请补全!')
         else:
@@ -92,10 +92,32 @@ def update_(uid):
                 user_.addrs[0].province = province
                 user_.addrs[0].city = city
                 user_.addrs[0].detail = detail
-                return redirect(url_for('.index',page=1,size=3))
+                return redirect(url_for('.index', page=1, size=3))
             else:
                 return render_template('user_update.html', msg='所有选线为必填项,请补全!',
                                        user_=User.query.filter(User.uid == uid).first())
         else:
             return render_template('user_update.html', msg='所有选线为必填项,请补全!',
                                    user_=User.query.filter(User.uid == uid).first())
+
+
+# @user.route('/pag/<int:page>/<int:size>/')
+# def test_macro(page, size):
+#     pagination = User.query.paginate(page=page, per_page=size, error_out=False)
+#     return render_template('limit.html', pagination=pagination, size=size)
+
+
+@user.route('/pag2/')
+def test2_macro():
+    page = request.values.get('page')
+    size = request.values.get('size')
+    if page and size:
+        try:
+            page = int(page)
+            size = int(size)
+            pagination = User.query.paginate(page=page, per_page=size, error_out=False)
+            return render_template('limit.html', pagination=pagination, size=size)
+        except Exception as e:
+            pass
+    else:
+        pass

@@ -17,7 +17,7 @@ def init_db(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:admin@127.0.0.1:3306/flask_orm2?charset=utf8'
     #  打印sql语句
     app.config['SQLALCHEMY_ECHO'] = True
-    # 自动提交事务
+    # 自动提交事务  将整个视图函数作为一个事务
     app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
     #  提示信息\
 
